@@ -1,0 +1,67 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "A cosmetic product in the catalog with price, details, and stock count",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "brand": { "type": "string" },
+        "category": { "type": "string" },
+        "categoryLabel": { "type": "string" },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "rating": { "type": "number" },
+        "reviewCount": { "type": "number" },
+        "image": { "type": "string" },
+        "gallery": { "type": "array" },
+        "shortDescription": { "type": "string" },
+        "fullDescription": { "type": "string" },
+        "presentation": { "type": "string" },
+        "benefits": { "type": "array" },
+        "howToUse": { "type": "string" },
+        "badges": { "type": "array" },
+        "inStock": { "type": "boolean" },
+        "stockCount": { "type": "number" },
+        "variants": { "type": "array" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "price", "category", "inStock"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A WhatsApp order placed by a customer from the cart",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerAddress": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "items": { "type": "array" },
+        "itemCount": { "type": "number" },
+        "subtotal": { "type": "number" },
+        "shippingCost": { "type": "number" },
+        "total": { "type": "number" },
+        "status": { "type": "string", "enum": ["pendiente", "entregado", "cancelado"] },
+        "channel": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "deliveredAt": { "type": "string" },
+        "stockDeducted": { "type": "boolean" }
+      },
+      "required": ["id", "orderNumber", "items", "total", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Stores cosmetic products inventory and prices"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Stores incoming WhatsApp customer orders and delivery status"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Products collection: public catalog and admin inventory
+    match /products/{productId} {
+      allow read, write: if true;
+    }
+
+    // Orders collection: WhatsApp order tracking and stock status
+    match /orders/{orderId} {
+      allow read, write: if true;
+    }
+  }
+}
+
